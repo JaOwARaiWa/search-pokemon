@@ -50,7 +50,7 @@ export default function PokemonGrid({ pokemonList }: PokemonGridProps) {
 
                 {filteredPokemonList.map((pokemon: any) => {
                     return (
-                        <PokemonCard image={pokemon.image} name={pokemon.name} />
+                        <PokemonCard image={pokemon.image} name={pokemon.name} key={pokemon.id}/>
                     )
                 })}
             </div>

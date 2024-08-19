@@ -6,10 +6,14 @@ import { PokemonImage } from "@/components/pokemon-image";
 import { PokemonCard } from '@/components/pokemon-card';
 import { PokemonAttack } from '@/components/pokemon-attack';
 
-function showAttacks(attacks) {
+function showAttacks(pokemon, attacks) {
     return attacks.map((attack: any) => {
         return (
-            <PokemonAttack name={attack.name} type={attack.type} damage={attack.damage} />
+            <PokemonAttack name={attack.name}
+                            type={attack.type}
+                            damage={attack.damage}
+                            key={pokemon + " " + attacks.name}
+            />
         )
     })
 }
@@ -21,7 +25,10 @@ function showEvolution(evolutions) {
     } else {
         return evolutions.map((pokemon: any) => {
             return (
-                <PokemonCard image={pokemon.image} name={pokemon.name} />
+                <PokemonCard image={pokemon.image}
+                                name={pokemon.name}
+                                key={pokemon.id}
+                />
             )
         })
     }
@@ -103,17 +110,17 @@ export default function PokemonPage({ params }: { params: { pokemonName: string 
             <div className="group rounded-lg border border-transparent m-3 px-5 py-4 transition-colors dark:border-gray-500 hover:border-gray-300 hover:bg-gray-100 hover:dark:border-neutral-700 hover:dark:bg-neutral-800/30">
                 <h3 className="font-bold">Fast Attacks: </h3>
                 <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-center">
-                    {showAttacks(data.pokemon.attacks.fast)}
+                    {showAttacks(pokemonName, data.pokemon.attacks.fast)}
                 </div>
                 <br />
                 <h3 className="font-bold">Special Attacks: </h3>
                 <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-center">
-                    {showAttacks(data.pokemon.attacks.special)}
+                    {showAttacks(pokemonName, data.pokemon.attacks.special)}
                 </div>
             </div>
             <br />
             <h3 className="font-bold">Evolutions</h3>
-            <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-2 lg:text-center">
+            <div className="mb-32 grid text-center lg:mb-0 lg:grid-cols-3 lg:text-center">
                 {showEvolution(data.pokemon.evolutions)}
             </div>
         </>
