@@ -11,18 +11,32 @@ interface PokemonGridProps {
 export default function PokemonGrid({ pokemonList }: PokemonGridProps) {
     const [ searchText, setSearchText ] = useState("");
 
+    const getSearchInputs = () => {
+        return searchText
+            .split(',')
+            .map(pokemon => pokemon.trim().toLowerCase())
+            .filter(pokemon => pokemon.length > 0);
+    };
+
     const searchFilter = (pokemonList: any) => {
-        return pokemonList.filter(
-            (pokemon: any) => pokemon.name.toLowerCase().includes(searchText.toLowerCase())
-        )
-    }
+        const searchPokemons = getSearchInputs();
+
+        if (searchText == "") {
+            return pokemonList
+        } else {
+            return pokemonList.filter((pokemon: any) => {
+                const pokemonName = pokemon.name.toLowerCase();
+                return searchPokemons.some(findingPokemon => pokemonName.includes(findingPokemon));
+            });
+        }
+    };
 
     const filteredPokemonList = searchFilter(pokemonList);
 
     const showNotFound = () => {
         if (searchText != "" && filteredPokemonList.length == 0) {
             return "Not Found Your Pokemon."
-            
+
         }
     }
 
