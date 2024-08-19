@@ -31,15 +31,16 @@ export default function PokemonGrid({ pokemonList }: PokemonGridProps) {
             <div>
                 <h1 className="text-2xl py-6 text-center">PokeDex</h1>
                 <div className="grid w-full max-w-sm items-center gap-1.5">
+                    Search Pokemon here
                     <Input
+                        className="dark:text-black"
                         type="text"
-                        label="Search Pokemon"
                         placeholder="Ex. Pikachu, Balbasaur, etc."
                         autoComplete="off"
                         value={searchText}
                         id="pokemonName"
                         onChange={(e) => setSearchText(e.target.value)}
-                        style={{ marginTop: "10px", padding: "3px", borderWidth: "3px", borderColor: "white"}}
+                        style={{ marginTop: "1px", padding: "3px", borderWidth: "3px", borderColor: "white"}}
                     />
                 </div>
                 <h3 className="text-3xl pt-12 pb-6 text-center">Pokemon Collection</h3>
